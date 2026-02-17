@@ -18,4 +18,4 @@ Fan project for Art of the Web. Pokémon is © Nintendo/Game Freak/Creatures Inc
 
 ## Live Site
 
-https://[username].github.io/kanto-field-guide/
+https://samirpatki.github.io/kanto-field-guide/
