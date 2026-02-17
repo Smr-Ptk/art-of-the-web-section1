@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanto Field Guide — Pewter City Gym</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-gym has-nav">
+  <main class="container">
+    <!-- 1. Announcement banner -->
+    <header class="gym-banner">
+      <h1 class="gym-banner-title">PEWTER CITY GYM</h1>
+      <p class="gym-banner-subtitle">LEADER: BROCK — The Rock-Solid Pokémon Trainer!</p>
+    </header>
+
+    <!-- 2. Battle screen container -->
+    <div class="battle-screen">
+      <!-- TOP HALF — Opponent's side -->
+      <div class="battle-half battle-opponent">
+        <div class="battle-info battle-info-left">
+          <p class="battle-name">ONIX  Lv.14</p>
+          <div class="hp-bar-container">
+            <div class="hp-bar-fill" style="width: 70%;"></div>
+          </div>
+          <p class="battle-type">Rock/Ground</p>
+        </div>
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png" alt="Onix" class="battle-sprite battle-sprite-opponent">
+      </div>
+
+      <div class="battle-divider"></div>
+
+      <!-- BOTTOM HALF — Player's side -->
+      <div class="battle-half battle-player">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" alt="Squirtle" class="battle-sprite battle-sprite-player">
+        <div class="battle-info battle-info-right">
+          <p class="battle-name">SQUIRTLE  Lv.12</p>
+          <div class="hp-bar-container">
+            <div class="hp-bar-fill" style="width: 90%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Move menu -->
+    <div class="battle-menu">
+      <div class="battle-menu-row">
+        <span class="battle-menu-option">FIGHT</span>
+        <span class="battle-menu-option">POKÉMON</span>
+      </div>
+      <div class="battle-menu-row">
+        <span class="battle-menu-option">BAG</span>
+        <span class="battle-menu-option">RUN</span>
+      </div>
+    </div>
+
+    <!-- 4. Brock's Team -->
+    <section class="brock-team">
+      <h2 class="brock-team-heading">BROCK'S TEAM</h2>
+      <div class="brock-team-grid">
+        <div class="brock-pokemon">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/74.png" alt="Geodude" class="brock-sprite">
+          <p class="brock-name">GEODUDE #074</p>
+          <p class="brock-meta">Lv.12 | Rock/Ground</p>
+        </div>
+        <div class="brock-pokemon">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png" alt="Onix" class="brock-sprite">
+          <p class="brock-name">ONIX #095</p>
+          <p class="brock-meta">Lv.14 | Rock/Ground</p>
+        </div>
+      </div>
+      <div class="dialogue-box brock-tip">
+        Tip: Brock's Pokémon are weak to Water and Grass-type moves. Choose your starter wisely!
+      </div>
+    </section>
+
+    <!-- 5. Badge section -->
+    <section class="badge-section">
+      <h2 class="badge-heading">REWARD: BOULDER BADGE</h2>
+      <div class="badge-icon"></div>
+      <p class="badge-desc">The Boulder Badge allows your Pokémon to use FLASH outside of battle. It also boosts your Pokémon's Attack stat.</p>
+    </section>
+
+    <!-- 6. End prompt -->
+    <section class="gym-end">
+      <p class="gym-end-text">With your first badge earned, it's time to review your journey.</p>
+      <a href="pokedex.html" class="menu-link">VIEW POKÉDEX →</a>
+    </section>
+  </main>
+  <nav class="main-nav">
+    <a href="index.html">MAP</a>
+    <a href="pallet-town.html">PALLET</a>
+    <a href="route1.html">ROUTE 1</a>
+    <a href="pewter-gym.html" class="current">GYM</a>
+    <a href="pokedex.html">POKÉDEX</a>
+  </nav>
+</body>
+</html>

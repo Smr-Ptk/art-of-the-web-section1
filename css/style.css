@@ -1,0 +1,879 @@
+/* ============================================
+   Kanto Field Guide — Shared Design System
+   ============================================ */
+
+/* CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* CSS Custom Properties — Game Boy Palette */
+:root {
+  --darkest: #0f380f;
+  --dark: #306230;
+  --light: #8bac0f;
+  --lightest: #9bbc0f;
+}
+
+/* Base Styles — Press Start 2P loaded via link in HTML */
+html {
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--darkest);
+  background-color: var(--lightest);
+  min-height: 100vh;
+  line-height: 1.6;
+  animation: screenOn 0.2s ease-out, pageFadeIn 0.4s ease-out 0.2s both;
+}
+
+@keyframes screenOn {
+  from {
+    background-color: var(--darkest);
+  }
+  to {
+    background-color: var(--lightest);
+  }
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Pixel Art Image Rendering */
+img {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Max Content Width Container */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Scanline Overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ============================================
+   Main Navigation Bar
+   ============================================ */
+.main-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--darkest);
+  border-top: 4px solid var(--darkest);
+  padding: 1rem 2rem;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 2rem;
+}
+
+.main-nav a {
+  color: var(--light);
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: 0.5rem;
+}
+
+.main-nav a:hover {
+  color: var(--lightest);
+}
+
+.main-nav a.current {
+  color: var(--lightest);
+  background-color: var(--dark);
+  padding: 0.5rem 0.8rem;
+}
+
+/* Add bottom padding when nav is present (pages with nav bar) */
+body.has-nav {
+  padding-bottom: 5rem;
+}
+
+/* ============================================
+   Link Styles
+   ============================================ */
+a {
+  color: var(--darkest);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================
+   Reusable Components
+   ============================================ */
+
+/* Dialogue Box — Game Boy text box style */
+.dialogue-box {
+  border: 4px solid var(--darkest);
+  background-color: var(--light);
+  padding: 1.5rem 2rem;
+  position: relative;
+  padding-right: 3rem;
+}
+
+.dialogue-box::after {
+  content: '▼';
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.8rem;
+  color: var(--darkest);
+  animation: blink 1s step-end infinite;
+}
+
+/* Encounter Card — Wild Pokémon card */
+.encounter-card {
+  border: 4px solid var(--darkest);
+  background-color: var(--light);
+  padding: 1.5rem;
+  max-width: 280px;
+}
+
+.encounter-sprite {
+  width: 96px;
+  height: 96px;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.encounter-header {
+  font-size: 0.6rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.encounter-meta {
+  font-size: 0.5rem;
+  color: var(--dark);
+  margin-bottom: 0.8rem;
+}
+
+.encounter-flavor {
+  font-size: 0.5rem;
+  line-height: 1.6;
+}
+
+.encounter-card-left {
+  margin-right: auto;
+}
+
+.encounter-card-right {
+  margin-left: auto;
+}
+
+.encounter-card-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.encounter-card-rare {
+  border: 6px double var(--darkest);
+  padding: 1.8rem;
+  max-width: 320px;
+  box-shadow: 0 0 20px var(--lightest);
+}
+
+/* ============================================
+   Town Map Hub — Game Boy Screen
+   ============================================ */
+
+.gameboy-screen {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 8px solid var(--darkest);
+  background-color: var(--lightest);
+  box-shadow: inset 0 0 0 4px var(--dark);
+}
+
+.map-title {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.map-subtitle {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.map-container {
+  position: relative;
+  background-color: var(--light);
+  min-height: 280px;
+  margin-bottom: 2rem;
+}
+
+.map-path {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  bottom: 10%;
+  width: 4px;
+  background-color: var(--darkest);
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.map-node {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.6rem 1rem;
+  background-color: var(--darkest);
+  color: var(--lightest);
+  font-size: 0.7rem;
+  text-decoration: none;
+  z-index: 1;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.map-node:hover {
+  background-color: var(--light);
+  color: var(--darkest);
+  transform: translateX(-50%) scale(1.05);
+  text-decoration: none;
+}
+
+.map-node-pallet {
+  bottom: 10%;
+}
+
+.map-node-route1 {
+  bottom: 40%;
+}
+
+.map-node-pewter {
+  bottom: 70%;
+}
+
+.pokedex-start {
+  display: block;
+  text-align: center;
+  padding: 1rem 2rem;
+  background-color: var(--darkest);
+  color: var(--lightest);
+  font-size: 0.8rem;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pokedex-start:hover {
+  background-color: var(--light);
+  color: var(--darkest);
+  text-decoration: none;
+}
+
+.select-destination {
+  font-size: 0.7rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.select-destination::after {
+  content: '▌';
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.map-instruction {
+  font-size: 0.6rem;
+  text-align: center;
+  color: var(--dark);
+}
+
+/* ============================================
+   Pallet Town — Origin Story Page
+   ============================================ */
+
+.location-header {
+  margin-bottom: 2rem;
+}
+
+.location-banner {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.location-subtitle {
+  font-size: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.location-divider {
+  border: none;
+  border-top: 4px solid var(--darkest);
+}
+
+.dialogue-spaced {
+  margin-bottom: 5rem;
+}
+
+.dialogue-spaced:last-of-type {
+  margin-bottom: 2rem;
+}
+
+/* Starter Pokémon showcase */
+.starter-showcase {
+  margin-bottom: 3rem;
+}
+
+.starter-heading {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.starter-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.starter-card {
+  border: 4px solid var(--darkest);
+  background-color: var(--light);
+  padding: 1.5rem;
+  flex: 1 1 200px;
+  max-width: 260px;
+  transition: background-color 0.2s ease;
+}
+
+.starter-card:hover {
+  background-color: var(--lightest);
+}
+
+.starter-sprite {
+  width: 96px;
+  height: 96px;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.starter-id {
+  font-size: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.starter-type {
+  font-size: 0.5rem;
+  color: var(--dark);
+  margin-bottom: 0.8rem;
+}
+
+.starter-flavor {
+  font-size: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Game Boy menu selection link */
+.menu-link {
+  display: inline-block;
+  font-size: 0.8rem;
+  padding: 0.5rem 0;
+  margin-top: 1rem;
+}
+
+.menu-link::before {
+  content: '> ';
+}
+
+.menu-link:hover::before {
+  animation: blink 1s step-end infinite;
+}
+
+/* ============================================
+   Route 1 — Walking Through Tall Grass
+   ============================================ */
+
+.route1-content {
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--light) 0px,
+    var(--light) 8px,
+    var(--dark) 8px,
+    var(--dark) 16px
+  );
+  padding-bottom: 3rem;
+}
+
+.route1-banner {
+  margin-bottom: 3rem;
+}
+
+.route1-title {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.route1-subtitle {
+  font-size: 0.7rem;
+  margin-bottom: 0.3rem;
+}
+
+.route1-hint {
+  font-size: 0.5rem;
+  color: var(--dark);
+}
+
+.route1-spacer {
+  height: 0;
+}
+
+.route1-spacer-200 {
+  height: 200px;
+}
+
+.route1-spacer-150 {
+  height: 150px;
+}
+
+.route1-spacer-300 {
+  height: 300px;
+}
+
+.route1-spacer-100 {
+  height: 100px;
+}
+
+.route1-signpost {
+  text-align: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--dark);
+  border: 4px solid var(--darkest);
+  font-size: 0.5rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.route1-end {
+  margin-top: 2rem;
+}
+
+.route1-end-text {
+  font-size: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.route1-end-arrival {
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   Pewter Gym — Game Boy Battle Screen
+   ============================================ */
+
+/* Announcement banner */
+.gym-banner {
+  background-color: var(--darkest);
+  color: var(--lightest);
+  text-align: center;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.gym-banner-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.gym-banner-subtitle {
+  font-size: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Battle screen container */
+.battle-screen {
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 6px solid var(--darkest);
+  background-color: var(--light);
+  box-shadow: inset 0 0 0 3px var(--dark);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+/* Battle halves */
+.battle-half {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  min-height: 120px;
+}
+
+.battle-opponent {
+  background-color: var(--light);
+}
+
+.battle-player {
+  background-color: var(--light);
+}
+
+/* Divider between halves */
+.battle-divider {
+  height: 4px;
+  background-color: var(--darkest);
+}
+
+/* Battle sprites */
+.battle-sprite {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.battle-sprite-opponent {
+  width: 128px;
+  height: 128px;
+  order: 2;
+}
+
+.battle-sprite-player {
+  width: 96px;
+  height: 96px;
+  order: 1;
+}
+
+/* Battle info boxes */
+.battle-info {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.battle-info-left {
+  text-align: left;
+}
+
+.battle-info-right {
+  text-align: right;
+  order: 2;
+}
+
+.battle-name {
+  font-size: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.battle-type {
+  font-size: 0.5rem;
+  color: var(--dark);
+  margin-top: 0.5rem;
+}
+
+/* HP bar */
+.hp-bar-container {
+  border: 3px solid var(--darkest);
+  background-color: var(--lightest);
+  height: 12px;
+  overflow: hidden;
+  min-width: 120px;
+}
+
+.battle-info-right .hp-bar-container {
+  margin-left: auto;
+}
+
+.hp-bar-fill {
+  height: 100%;
+  background-color: var(--dark);
+  transition: width 0.3s ease;
+}
+
+/* Move menu — Game Boy battle menu box */
+.battle-menu {
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 4px solid var(--darkest);
+  background-color: var(--light);
+  padding: 1rem;
+}
+
+.battle-menu-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.battle-menu-row:last-child {
+  margin-bottom: 0;
+}
+
+.battle-menu-option {
+  flex: 1;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  padding: 1rem;
+  background-color: var(--lightest);
+  border: 3px solid var(--darkest);
+  color: var(--darkest);
+  display: block;
+  text-align: center;
+}
+
+/* Brock's Team section */
+.brock-team {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.brock-team-heading {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.brock-team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.brock-pokemon {
+  border: 4px solid var(--darkest);
+  background-color: var(--light);
+  padding: 1.5rem;
+  flex: 1 1 200px;
+  max-width: 260px;
+}
+
+.brock-sprite {
+  width: 96px;
+  height: 96px;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.brock-name {
+  font-size: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.brock-meta {
+  font-size: 0.5rem;
+  color: var(--dark);
+}
+
+.brock-tip {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* Badge section */
+.badge-section {
+  margin-bottom: 2.5rem;
+}
+
+.badge-heading {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.badge-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  background-color: var(--dark);
+  border: 4px solid var(--darkest);
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+}
+
+.badge-desc {
+  font-size: 0.5rem;
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+/* Gym end prompt */
+.gym-end {
+  margin-top: 2rem;
+}
+
+.gym-end-text {
+  font-size: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   Pokédex — Flexbox Grid Catalog
+   ============================================ */
+
+.pokedex-header {
+  margin-bottom: 2rem;
+}
+
+.pokedex-title {
+  font-size: 20px;
+  margin-bottom: 0.5rem;
+}
+
+.pokedex-subtitle {
+  font-size: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.pokedex-divider {
+  border: none;
+  border-top: 4px solid var(--darkest);
+}
+
+.pokedex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  padding: 16px;
+}
+
+.pokedex-card {
+  flex: 0 1 180px;
+  border: 4px solid var(--darkest);
+  background: var(--light);
+  padding: 12px;
+  text-align: center;
+}
+
+.pokedex-card img {
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.pokedex-card .poke-number {
+  font-size: 8px;
+  color: var(--dark);
+}
+
+.pokedex-card .poke-name {
+  font-size: 10px;
+  margin: 4px 0;
+}
+
+.pokedex-card .poke-type {
+  font-size: 8px;
+  border: 2px solid var(--darkest);
+  display: inline-block;
+  padding: 2px 6px;
+  margin: 2px;
+}
+
+.pokedex-card .poke-desc {
+  font-size: 8px;
+  color: var(--dark);
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+.pokedex-footer {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+}
+
+.pokedex-dialogue {
+  margin-bottom: 1.5rem;
+}
+
+.pokedex-footer .menu-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.pokedex-credit {
+  font-size: 0.5rem;
+  color: var(--dark);
+}
+
+/* ============================================
+   Mobile / Responsive
+   ============================================ */
+@media (max-width: 600px) {
+  .main-nav a {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-nav a {
+    font-size: 8px;
+  }
+}
+
+/* Pokedex grid: 2 columns on narrow, 1 on very narrow */
+@media (max-width: 600px) {
+  .pokedex-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .pokedex-card {
+    flex: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .pokedex-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Town map hotspots: ensure tappable on mobile (min touch target 44px) */
+.map-node {
+  min-height: 44px;
+  min-width: 120px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokedex-start {
+  min-height: 44px;
+}
