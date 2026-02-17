@@ -138,10 +138,10 @@ a:hover {
    Reusable Components
    ============================================ */
 
-/* Dialogue Box — Game Boy text box style */
+/* Dialogue Box — Game Boy text box style (blinking indicator box = white) */
 .dialogue-box {
   border: 4px solid var(--darkest);
-  background-color: var(--light);
+  background-color: #fff;
   padding: 1.5rem 2rem;
   position: relative;
   padding-right: 3rem;
@@ -212,6 +212,20 @@ a:hover {
 /* ============================================
    Town Map Hub — Game Boy Screen
    ============================================ */
+
+/* Center Kanto Field Guide content in viewport */
+body.page-map {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.page-map .container {
+  width: 100%;
+  max-width: 90vw;
+}
 
 .gameboy-screen {
   max-width: 800px;
@@ -300,6 +314,14 @@ a:hover {
   background-color: var(--light);
   color: var(--darkest);
   text-decoration: none;
+}
+
+/* Ending text box with blinking indicator — white background */
+.ending-text-box {
+  background-color: #fff;
+  border: 4px solid var(--darkest);
+  padding: 1.5rem 2rem;
+  margin-top: 1rem;
 }
 
 .select-destination {
