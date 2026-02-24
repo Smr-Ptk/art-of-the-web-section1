@@ -68,5 +68,292 @@
     <a href="pewter-gym.html">GYM</a>
     <a href="pokedex.html">POKÉDEX</a>
   </nav>
+
+  <!-- ART OF THE WEB RING — paste before </body> -->
+  <div id="aow-webring">
+    <style>
+      /* Scoped reset — prevents host site CSS from affecting the widget */
+      #aow-webring, #aow-webring * {
+        all: revert;
+        box-sizing: border-box;
+        font-family: "Courier New", Courier, monospace;
+      }
+
+      /* Globe button — fixed bottom-right */
+      #aow-webring .aow-globe {
+        position: fixed;
+        bottom: 16px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #4cc9f0 0%, #2a8ba8 30%, #1a1a2e 70%);
+        border: 1px solid rgba(76, 201, 240, 0.3);
+        cursor: pointer;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+      }
+
+      #aow-webring .aow-globe:hover {
+        animation: aow-pulse 1.2s ease-in-out infinite;
+      }
+
+      @keyframes aow-pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+
+      /* Panel container — anchored bottom-right, slides up */
+      #aow-webring .aow-panel {
+        position: fixed;
+        bottom: 70px;
+        right: 16px;
+        width: 220px;
+        background: rgba(10, 10, 10, 0.93);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        padding: 14px;
+        z-index: 99998;
+        opacity: 0;
+        transform: translateY(8px);
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      #aow-webring .aow-panel.aow-open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      /* Header row */
+      #aow-webring .aow-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0;
+      }
+
+      #aow-webring .aow-title {
+        font-size: 11px;
+        font-weight: bold;
+        color: #ffffff;
+        margin: 0;
+      }
+
+      #aow-webring .aow-close {
+        background: none;
+        border: none;
+        color: #a0a0a0;
+        font-size: 14px;
+        cursor: pointer;
+        padding: 0 4px;
+        line-height: 1;
+      }
+
+      #aow-webring .aow-close:hover {
+        color: #ffffff;
+      }
+
+      /* Dividers */
+      #aow-webring .aow-divider {
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 8px 0;
+      }
+
+      /* Site list */
+      #aow-webring .aow-sites {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      #aow-webring .aow-sites li {
+        font-size: 10px;
+        line-height: 26px;
+      }
+
+      #aow-webring .aow-sites a {
+        color: #a0a0a0;
+        text-decoration: none;
+      }
+
+      #aow-webring .aow-sites a:hover {
+        color: #ffffff;
+        text-decoration: underline;
+      }
+
+      #aow-webring .aow-sites .aow-current {
+        color: #ffffff;
+        text-decoration: none;
+      }
+
+      /* Nav row */
+      #aow-webring .aow-nav {
+        text-align: center;
+        font-size: 9px;
+        margin-top: 0;
+      }
+
+      #aow-webring .aow-nav a {
+        color: #a0a0a0;
+        text-decoration: none;
+      }
+
+      #aow-webring .aow-nav a:hover {
+        color: #ffffff;
+        text-decoration: underline;
+      }
+
+      #aow-webring .aow-nav .aow-sep {
+        color: rgba(255, 255, 255, 0.4);
+        margin: 0 4px;
+      }
+    </style>
+
+    <!-- Globe button with lat/long lines -->
+    <button type="button" class="aow-globe" aria-label="Open web ring" title="Art of the Web Ring">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(76, 201, 240, 0.6)" stroke-width="0.8">
+        <ellipse cx="12" cy="12" rx="11" ry="4" />
+        <ellipse cx="12" cy="12" rx="4" ry="11" />
+        <line x1="12" y1="1" x2="12" y2="23" />
+        <line x1="1" y1="12" x2="23" y2="12" />
+      </svg>
+    </button>
+
+    <!-- Panel (initially hidden) -->
+    <div class="aow-panel" id="aow-panel" role="dialog" aria-label="Web ring sites">
+      <div class="aow-header">
+        <span class="aow-title">Art of the Web</span>
+        <button type="button" class="aow-close" aria-label="Close">✕</button>
+      </div>
+      <hr class="aow-divider">
+      <ul class="aow-sites" id="aow-sites"></ul>
+      <hr class="aow-divider">
+      <div class="aow-nav" id="aow-nav"></div>
+    </div>
+
+    <script>
+      (function() {
+        const SITES = [
+          { name: "Priya", url: "https://pbhavi22.github.io/" },
+          { name: "Ben", url: "https://benjijiang.github.io/index.html" },
+          { name: "Samir", url: "https://smr-ptk.github.io/art-of-the-web-section1/index.html" },
+          { name: "Olivia", url: "https://liu1310.github.io/s1fp/index.html" },
+          { name: "Joanna", url: "https://joannarr12.github.io/photography_portfolio/index.html" },
+          { name: "Jasmine", url: "https://jasmine-wng.github.io/s1fp/" }
+        ];
+
+        const container = document.getElementById("aow-webring");
+        const globe = container.querySelector(".aow-globe");
+        const panel = document.getElementById("aow-panel");
+        const closeBtn = container.querySelector(".aow-close");
+        const sitesList = document.getElementById("aow-sites");
+        const navEl = document.getElementById("aow-nav");
+
+        // Detect current site by hostname
+        const currentHost = window.location.hostname;
+        let currentIndex = -1;
+        SITES.forEach((site, i) => {
+          try {
+            if (new URL(site.url).hostname === currentHost) currentIndex = i;
+          } catch (_) {}
+        });
+
+        // Render site list
+        SITES.forEach((site, i) => {
+          const li = document.createElement("li");
+          if (i === currentIndex) {
+            li.innerHTML = "● " + site.name;
+            li.classList.add("aow-current");
+          } else {
+            const a = document.createElement("a");
+            a.href = site.url;
+            a.target = "_blank";
+            a.rel = "noopener";
+            a.textContent = "→ " + site.name;
+            li.appendChild(a);
+          }
+          sitesList.appendChild(li);
+        });
+
+        // Prev / Next / Random navigation
+        function goTo(index) {
+          window.location.href = SITES[index].url;
+        }
+
+        function getPrevIndex() {
+          return (currentIndex - 1 + SITES.length) % SITES.length;
+        }
+
+        function getNextIndex() {
+          return (currentIndex + 1) % SITES.length;
+        }
+
+        function getRandomIndex() {
+          let idx;
+          do {
+            idx = Math.floor(Math.random() * SITES.length);
+          } while (idx === currentIndex && SITES.length > 1);
+          return idx;
+        }
+
+        navEl.innerHTML =
+          '<a href="' + SITES[getPrevIndex()].url + '" id="aow-prev">← Prev</a>' +
+          '<span class="aow-sep">·</span>' +
+          '<a href="#" id="aow-random">Random</a>' +
+          '<span class="aow-sep">·</span>' +
+          '<a href="' + SITES[getNextIndex()].url + '" id="aow-next">Next →</a>';
+
+        document.getElementById("aow-prev").addEventListener("click", function(e) {
+          e.preventDefault();
+          goTo(getPrevIndex());
+        });
+        document.getElementById("aow-next").addEventListener("click", function(e) {
+          e.preventDefault();
+          goTo(getNextIndex());
+        });
+        document.getElementById("aow-random").addEventListener("click", function(e) {
+          e.preventDefault();
+          goTo(getRandomIndex());
+        });
+
+        // Toggle panel
+        function open() {
+          panel.classList.add("aow-open");
+        }
+
+        function close() {
+          panel.classList.remove("aow-open");
+        }
+
+        function toggle() {
+          panel.classList.toggle("aow-open");
+        }
+
+        globe.addEventListener("click", toggle);
+        closeBtn.addEventListener("click", close);
+
+        document.addEventListener("click", function(e) {
+          if (panel.classList.contains("aow-open") && !container.contains(e.target)) {
+            close();
+          }
+        });
+
+        document.addEventListener("keydown", function(e) {
+          if (e.key === "Escape" && panel.classList.contains("aow-open")) {
+            close();
+          }
+        });
+      })();
+    </script>
+  </div>
+  <!-- END WEB RING -->
 </body>
 </html>
