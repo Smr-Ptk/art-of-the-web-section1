@@ -44,11 +44,11 @@
         position: fixed;
         bottom: 16px;
         right: 16px;
-        width: 44px;
-        height: 44px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
-        background: radial-gradient(circle at 35% 35%, #4cc9f0 0%, #2a8ba8 30%, #1a1a2e 70%);
-        border: 1px solid rgba(76, 201, 240, 0.3);
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         cursor: pointer;
         z-index: 99999;
         display: flex;
@@ -70,14 +70,14 @@
       /* Panel container — anchored bottom-right, slides up */
       #aow-webring .aow-panel {
         position: fixed;
-        bottom: 70px;
+        bottom: 76px;
         right: 16px;
-        width: 220px;
+        width: 280px;
         background: rgba(10, 10, 10, 0.93);
         border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 8px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        padding: 14px;
+        padding: 18px;
         z-index: 99998;
         opacity: 0;
         transform: translateY(8px);
@@ -100,7 +100,7 @@
       }
 
       #aow-webring .aow-title {
-        font-size: 11px;
+        font-size: 16px;
         font-weight: bold;
         color: #ffffff;
         margin: 0;
@@ -110,7 +110,7 @@
         background: none;
         border: none;
         color: #a0a0a0;
-        font-size: 14px;
+        font-size: 18px;
         cursor: pointer;
         padding: 0 4px;
         line-height: 1;
@@ -135,8 +135,8 @@
       }
 
       #aow-webring .aow-sites li {
-        font-size: 10px;
-        line-height: 26px;
+        font-size: 16px;
+        line-height: 38px;
       }
 
       #aow-webring .aow-sites a {
@@ -157,7 +157,7 @@
       /* Nav row */
       #aow-webring .aow-nav {
         text-align: center;
-        font-size: 9px;
+        font-size: 14px;
         margin-top: 0;
       }
 
@@ -177,13 +177,16 @@
       }
     </style>
 
-    <!-- Globe button with lat/long lines -->
+    <!-- Globe button — wireframe globe icon -->
     <button type="button" class="aow-globe" aria-label="Open web ring" title="Art of the Web Ring">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(76, 201, 240, 0.6)" stroke-width="0.8">
-        <ellipse cx="12" cy="12" rx="11" ry="4" />
-        <ellipse cx="12" cy="12" rx="4" ry="11" />
-        <line x1="12" y1="1" x2="12" y2="23" />
-        <line x1="1" y1="12" x2="23" y2="12" />
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#1a1a1a" stroke-width="1.2">
+        <circle cx="24" cy="24" r="22" />
+        <ellipse cx="24" cy="24" rx="22" ry="6" />
+        <ellipse cx="24" cy="16" rx="14" ry="4" />
+        <ellipse cx="24" cy="32" rx="14" ry="4" />
+        <path d="M 24 2 A 22 22 0 0 1 24 46" />
+        <path d="M 8 24 A 22 22 0 0 1 40 24" />
+        <path d="M 8 24 A 22 22 0 0 0 40 24" />
       </svg>
     </button>
 
