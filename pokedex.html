@@ -153,7 +153,8 @@
         width: 48px;
         height: 48px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.95);
+        background: white;
+        border: 1.5px solid #ccc;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         cursor: pointer;
         z-index: 99999;
@@ -165,12 +166,7 @@
       }
 
       #aow-webring .aow-globe:hover {
-        animation: aow-pulse 1.2s ease-in-out infinite;
-      }
-
-      @keyframes aow-pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
       }
 
       /* Panel container — anchored bottom-right, slides up */
@@ -178,12 +174,12 @@
         position: fixed;
         bottom: 76px;
         right: 16px;
-        width: 280px;
-        background: rgba(10, 10, 10, 0.93);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        width: 260px;
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(0, 0, 0, 0.12);
         border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        padding: 18px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        padding: 16px;
         z-index: 99998;
         opacity: 0;
         transform: translateY(8px);
@@ -206,30 +202,30 @@
       }
 
       #aow-webring .aow-title {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
-        color: #ffffff;
+        color: #222;
         margin: 0;
       }
 
       #aow-webring .aow-close {
         background: none;
         border: none;
-        color: #a0a0a0;
-        font-size: 18px;
+        color: #999;
+        font-size: 16px;
         cursor: pointer;
         padding: 0 4px;
         line-height: 1;
       }
 
       #aow-webring .aow-close:hover {
-        color: #ffffff;
+        color: #333;
       }
 
       /* Dividers */
       #aow-webring .aow-divider {
         border: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
         margin: 8px 0;
       }
 
@@ -241,58 +237,64 @@
       }
 
       #aow-webring .aow-sites li {
-        font-size: 16px;
-        line-height: 38px;
+        font-size: 13px;
+        line-height: 36px;
       }
 
       #aow-webring .aow-sites a {
-        color: #a0a0a0;
+        color: #555;
         text-decoration: none;
       }
 
       #aow-webring .aow-sites a:hover {
-        color: #ffffff;
+        color: #000;
         text-decoration: underline;
       }
 
+      #aow-webring .aow-sites .aow-arrow {
+        color: #999;
+      }
+
+      #aow-webring .aow-sites a:hover .aow-arrow {
+        color: #000;
+      }
+
       #aow-webring .aow-sites .aow-current {
-        color: #ffffff;
+        color: #000;
         text-decoration: none;
       }
 
       /* Nav row */
       #aow-webring .aow-nav {
         text-align: center;
-        font-size: 14px;
+        font-size: 12px;
         margin-top: 0;
       }
 
       #aow-webring .aow-nav a {
-        color: #a0a0a0;
+        color: #666;
         text-decoration: none;
       }
 
       #aow-webring .aow-nav a:hover {
-        color: #ffffff;
+        color: #000;
         text-decoration: underline;
       }
 
       #aow-webring .aow-nav .aow-sep {
-        color: rgba(255, 255, 255, 0.4);
+        color: #999;
         margin: 0 4px;
       }
     </style>
 
-    <!-- Globe button — wireframe globe icon -->
+    <!-- Globe button -->
     <button type="button" class="aow-globe" aria-label="Open web ring" title="Art of the Web Ring">
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#1a1a1a" stroke-width="1.2">
-        <circle cx="24" cy="24" r="22" />
-        <ellipse cx="24" cy="24" rx="22" ry="6" />
-        <ellipse cx="24" cy="16" rx="14" ry="4" />
-        <ellipse cx="24" cy="32" rx="14" ry="4" />
-        <path d="M 24 2 A 22 22 0 0 1 24 46" />
-        <path d="M 8 24 A 22 22 0 0 1 40 24" />
-        <path d="M 8 24 A 22 22 0 0 0 40 24" />
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        <path d="M2 12h20"/>
+        <path d="M4.5 6.5h15"/>
+        <path d="M4.5 17.5h15"/>
       </svg>
     </button>
 
@@ -341,14 +343,14 @@
           if (i === currentIndex) {
             li.innerHTML = "● " + site.name;
             li.classList.add("aow-current");
-          } else {
-            const a = document.createElement("a");
-            a.href = site.url;
-            a.target = "_blank";
-            a.rel = "noopener";
-            a.textContent = "→ " + site.name;
-            li.appendChild(a);
-          }
+        } else {
+          const a = document.createElement("a");
+          a.href = site.url;
+          a.target = "_blank";
+          a.rel = "noopener";
+          a.innerHTML = '<span class="aow-arrow">→ </span>' + site.name;
+          li.appendChild(a);
+        }
           sitesList.appendChild(li);
         });
 
