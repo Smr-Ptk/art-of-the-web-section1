@@ -139,8 +139,8 @@
   <div id="aow-webring">
     <style>
       /* Scoped reset — prevents host site CSS from affecting the widget */
-      #aow-webring, #aow-webring * {
-        all: revert;
+    #aow-webring, #aow-webring *:not(img) {
+      all: revert;
         box-sizing: border-box;
         font-family: "Courier New", Courier, monospace;
       }
@@ -289,13 +289,7 @@
 
     <!-- Globe button -->
     <button type="button" class="aow-globe" aria-label="Open web ring" title="Art of the Web Ring">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-        <path d="M2 12h20"/>
-        <path d="M4.5 6.5h15"/>
-        <path d="M4.5 17.5h15"/>
-      </svg>
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PHBhdGggZD0iTTEyIDJhMTUuMyAxNS4zIDAgMCAxIDQgMTAgMTUuMyAxNS4zIDAgMCAxLTQgMTAgMTUuMyAxNS4zIDAgMCAxLTQtMTAgMTUuMyAxNS4zIDAgMCAxIDQtMTB6Ii8+PHBhdGggZD0iTTIgMTJoMjAiLz48cGF0aCBkPSJNNC41IDYuNWgxNSIvPjxwYXRoIGQ9Ik00LjUgMTcuNWgxNSIvPjwvc3ZnPg==" alt="Web Ring" width="32" height="32" style="display:block;">
     </button>
 
     <!-- Panel (initially hidden) -->
